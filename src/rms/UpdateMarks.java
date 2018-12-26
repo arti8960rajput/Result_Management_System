@@ -16,6 +16,7 @@ public class UpdateMarks extends javax.swing.JFrame {
      */
     public UpdateMarks() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -39,6 +40,7 @@ public class UpdateMarks extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         sem = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
+        getdetails = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,13 +55,13 @@ public class UpdateMarks extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         jLabel3.setText("Reg No.");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         regno.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         regno.setForeground(new java.awt.Color(0, 0, 153));
         regno.setBorder(null);
-        jPanel1.add(regno, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 160, 20));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 160, 10));
+        jPanel1.add(regno, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 160, 20));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 160, 10));
 
         jTable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -82,7 +84,7 @@ public class UpdateMarks extends javax.swing.JFrame {
         jTable1.setRowHeight(25);
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 640, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 640, 220));
 
         update.setBackground(new java.awt.Color(255, 255, 255));
         update.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
@@ -94,22 +96,49 @@ public class UpdateMarks extends javax.swing.JFrame {
         back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         back.setForeground(new java.awt.Color(204, 0, 51));
         back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
         jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, 80, -1));
 
         jLabel4.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         jLabel4.setText("Semester");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, -1, -1));
 
         sem.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         sem.setForeground(new java.awt.Color(0, 0, 153));
         sem.setBorder(null);
-        jPanel1.add(sem, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 80, 20));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, 80, 10));
+        jPanel1.add(sem, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 80, 20));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 80, 10));
+
+        getdetails.setBackground(new java.awt.Color(255, 255, 255));
+        getdetails.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        getdetails.setForeground(new java.awt.Color(0, 0, 153));
+        getdetails.setText("get details");
+        getdetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getdetailsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(getdetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        UpdateStudent us = new UpdateStudent();
+        us.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void getdetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getdetailsActionPerformed
+        
+    }//GEN-LAST:event_getdetailsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,6 +177,7 @@ public class UpdateMarks extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JButton getdetails;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

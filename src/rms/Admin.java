@@ -5,6 +5,12 @@
  */
 package rms;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import static rms.LogIn.user;
+
 /**
  *
  * @author Deepak
@@ -16,6 +22,7 @@ public class Admin extends javax.swing.JFrame {
      */
     public Admin() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -71,18 +78,76 @@ public class Admin extends javax.swing.JFrame {
         back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         back.setForeground(new java.awt.Color(255, 0, 0));
         back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
         jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, 80, -1));
 
         login.setBackground(new java.awt.Color(255, 255, 255));
         login.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         login.setForeground(new java.awt.Color(0, 153, 0));
         login.setText("Log in");
+        login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginActionPerformed(evt);
+            }
+        });
         jPanel1.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 80, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        LogIn lg = new LogIn();
+        lg.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backActionPerformed
+
+    
+    PreparedStatement pstmt=null;
+    ResultSet rs=null;
+    String dbpass=null;
+    static  String user=null;
+    
+    
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        // TODO add your handling code here:
+        
+        user=username.getText();
+        String pass=password.getText();
+       
+       try
+        {
+            MySql msql=new MySql();
+            pstmt=msql.conn.prepareStatement("select * from login where username=?");
+            pstmt.setString(1,user);
+            rs=pstmt.executeQuery();
+            while(rs.next())
+            {
+               dbpass=rs.getString("password");
+            }
+            if(dbpass.equals(pass))
+            {
+                Admininstrative adm = new Admininstrative();
+                adm.setVisible(true);
+                dispose();
+            }
+            else
+            {
+               // System.out.println("not sucesssssssss");
+                JOptionPane.showMessageDialog(null, "userid or password is wrong");
+            }
+        }
+        catch(SQLException e)
+                {
+                    System.out.println(e);
+                }
+    }//GEN-LAST:event_loginActionPerformed
 
     /**
      * @param args the command line arguments

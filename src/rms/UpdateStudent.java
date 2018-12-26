@@ -5,6 +5,12 @@
  */
 package rms;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Deepak
@@ -16,6 +22,7 @@ public class UpdateStudent extends javax.swing.JFrame {
      */
     public UpdateStudent() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -80,6 +87,11 @@ public class UpdateStudent extends javax.swing.JFrame {
         getdetails.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         getdetails.setForeground(new java.awt.Color(0, 0, 153));
         getdetails.setText("get details");
+        getdetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getdetailsActionPerformed(evt);
+            }
+        });
         jPanel1.add(getdetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
@@ -146,12 +158,22 @@ public class UpdateStudent extends javax.swing.JFrame {
         updatemarks.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         updatemarks.setForeground(new java.awt.Color(0, 0, 204));
         updatemarks.setText("Update Marks");
+        updatemarks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatemarksActionPerformed(evt);
+            }
+        });
         jPanel1.add(updatemarks, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 150, 30));
 
         back.setBackground(new java.awt.Color(255, 255, 255));
         back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         back.setForeground(new java.awt.Color(204, 0, 51));
         back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
         jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 80, -1));
 
         update.setBackground(new java.awt.Color(255, 255, 255));
@@ -164,6 +186,61 @@ public class UpdateStudent extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        Admininstrative adm = new Admininstrative();
+                adm.setVisible(true);
+                dispose();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void updatemarksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatemarksActionPerformed
+        // TODO add your handling code here:
+         UpdateMarks um = new UpdateMarks();
+        um.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_updatemarksActionPerformed
+      PreparedStatement pstmt=null,pstmt2=null;
+     ResultSet rs=null,rs2=null;
+    private void getdetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getdetailsActionPerformed
+        try {
+            // TODO add your handling code here:
+            String usr = regno.getText();
+            String nm=null,cp=null,mob=null,semm=null,eml=null,dbpass=null;
+            MySql msl = new MySql();
+            pstmt=msl.conn.prepareStatement("select * from studentrecord where RegNo=?");
+            pstmt2=msl.conn.prepareStatement("select * from login where username=?");
+            pstmt.setString(1,usr);
+            pstmt2.setString(1,usr);
+            rs=pstmt.executeQuery();
+           
+            while(rs.next())
+            {
+                nm=rs.getString("Name");
+                cp= rs.getString("CPI");
+                mob=rs.getString("Mobile");
+                semm= rs.getString("Semester");
+                eml=rs.getString("Email");
+                
+            }
+             rs2=pstmt2.executeQuery();
+            while(rs2.next())
+            {
+                dbpass = rs2.getString("password");
+            }
+            
+            name.setText(nm);
+            email.setText(eml);
+            mobile.setText(mob);
+            password.setText(dbpass);
+            sem.setText(semm);
+            cpi.setText(cp);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+    }//GEN-LAST:event_getdetailsActionPerformed
 
     /**
      * @param args the command line arguments

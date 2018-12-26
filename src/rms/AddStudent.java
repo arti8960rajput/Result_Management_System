@@ -16,6 +16,7 @@ public class AddStudent extends javax.swing.JFrame {
      */
     public AddStudent() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -145,6 +146,11 @@ public class AddStudent extends javax.swing.JFrame {
         addmarks.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         addmarks.setForeground(new java.awt.Color(0, 0, 204));
         addmarks.setText("Add Marks");
+        addmarks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addmarksActionPerformed(evt);
+            }
+        });
         jPanel1.add(addmarks, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 67, 150, 30));
 
         submit.setBackground(new java.awt.Color(255, 255, 255));
@@ -157,12 +163,31 @@ public class AddStudent extends javax.swing.JFrame {
         back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         back.setForeground(new java.awt.Color(255, 0, 51));
         back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
         jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, 80, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 680, 390));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        Admininstrative adm = new Admininstrative();
+                adm.setVisible(true);
+                dispose();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void addmarksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addmarksActionPerformed
+        // TODO add your handling code here:
+        AddMarks am = new AddMarks();
+        am.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_addmarksActionPerformed
 
     /**
      * @param args the command line arguments

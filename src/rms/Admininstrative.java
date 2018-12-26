@@ -16,6 +16,7 @@ public class Admininstrative extends javax.swing.JFrame {
      */
     public Admininstrative() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -49,30 +50,78 @@ public class Admininstrative extends javax.swing.JFrame {
         deletestudent.setFont(new java.awt.Font("Footlight MT Light", 1, 24)); // NOI18N
         deletestudent.setForeground(new java.awt.Color(255, 0, 51));
         deletestudent.setText("Delete Student Record");
+        deletestudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletestudentActionPerformed(evt);
+            }
+        });
         jPanel1.add(deletestudent, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 350, 30));
 
         modifystudent.setBackground(new java.awt.Color(255, 255, 255));
         modifystudent.setFont(new java.awt.Font("Footlight MT Light", 1, 24)); // NOI18N
         modifystudent.setForeground(new java.awt.Color(0, 0, 204));
         modifystudent.setText("Modify Student Record");
+        modifystudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifystudentActionPerformed(evt);
+            }
+        });
         jPanel1.add(modifystudent, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 350, 30));
 
         addstudent.setBackground(new java.awt.Color(255, 255, 255));
         addstudent.setFont(new java.awt.Font("Footlight MT Light", 1, 24)); // NOI18N
         addstudent.setForeground(new java.awt.Color(51, 153, 0));
         addstudent.setText("Add New Student");
+        addstudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addstudentActionPerformed(evt);
+            }
+        });
         jPanel1.add(addstudent, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 350, 30));
 
         back.setBackground(new java.awt.Color(255, 255, 255));
         back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         back.setForeground(new java.awt.Color(255, 0, 51));
         back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
         jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 80, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        Admin ad = new Admin();
+        ad.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void addstudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addstudentActionPerformed
+        // TODO add your handling code here:
+        AddStudent as = new AddStudent();
+        as.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_addstudentActionPerformed
+
+    private void deletestudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletestudentActionPerformed
+        // TODO add your handling code here:
+        DeleteRecord dr = new DeleteRecord();
+        dr.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_deletestudentActionPerformed
+
+    private void modifystudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifystudentActionPerformed
+        // TODO add your handling code here:
+        UpdateStudent us = new UpdateStudent();
+        us.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_modifystudentActionPerformed
 
     /**
      * @param args the command line arguments

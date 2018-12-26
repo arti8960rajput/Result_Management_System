@@ -87,6 +87,11 @@ public class LogIn extends javax.swing.JFrame {
         adminlogin.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         adminlogin.setForeground(new java.awt.Color(255, 0, 51));
         adminlogin.setText("Admin");
+        adminlogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminloginActionPerformed(evt);
+            }
+        });
         jPanel1.add(adminlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 80, -1));
 
         login.setBackground(new java.awt.Color(255, 255, 255));
@@ -140,6 +145,13 @@ public class LogIn extends javax.swing.JFrame {
                     System.out.println(e);
                 }
     }//GEN-LAST:event_loginActionPerformed
+
+    private void adminloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminloginActionPerformed
+        // TODO add your handling code here:
+        Admin as = new Admin();
+        as.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_adminloginActionPerformed
 
     /**
      * @param args the command line arguments

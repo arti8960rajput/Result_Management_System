@@ -16,6 +16,7 @@ public class DeleteRecord extends javax.swing.JFrame {
      */
     public DeleteRecord() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -63,6 +64,11 @@ public class DeleteRecord extends javax.swing.JFrame {
         back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         back.setForeground(new java.awt.Color(0, 0, 153));
         back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
         jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 260, 100, -1));
 
         jLabel2.setFont(new java.awt.Font("Footlight MT Light", 1, 36)); // NOI18N
@@ -85,6 +91,13 @@ public class DeleteRecord extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        Admininstrative adm = new Admininstrative();
+                adm.setVisible(true);
+                dispose();
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments
