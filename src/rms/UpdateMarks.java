@@ -5,6 +5,13 @@
  */
 package rms;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Deepak
@@ -33,14 +40,13 @@ public class UpdateMarks extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         regno = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         update = new javax.swing.JButton();
         back = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        sem = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
+        sembox = new javax.swing.JComboBox<>();
         getdetails = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,6 +69,42 @@ public class UpdateMarks extends javax.swing.JFrame {
         jPanel1.add(regno, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 160, 20));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 160, 10));
 
+        update.setBackground(new java.awt.Color(255, 255, 255));
+        update.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        update.setForeground(new java.awt.Color(0, 0, 153));
+        update.setText("Update");
+        jPanel1.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 80, -1));
+
+        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        back.setForeground(new java.awt.Color(204, 0, 51));
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, 80, -1));
+
+        jLabel4.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
+        jLabel4.setText("Semester");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
+
+        sembox.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        sembox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "select", "1st", "2nd", "3rd", "4th", "5th", "6th" }));
+        jPanel1.add(sembox, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 80, -1));
+
+        getdetails.setBackground(new java.awt.Color(255, 255, 255));
+        getdetails.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        getdetails.setForeground(new java.awt.Color(0, 0, 153));
+        getdetails.setText("get details");
+        getdetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getdetailsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(getdetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, -1, -1));
+
         jTable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,47 +126,9 @@ public class UpdateMarks extends javax.swing.JFrame {
         jTable1.setRowHeight(25);
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 640, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 640, 220));
 
-        update.setBackground(new java.awt.Color(255, 255, 255));
-        update.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        update.setForeground(new java.awt.Color(0, 0, 153));
-        update.setText("Update");
-        jPanel1.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 80, -1));
-
-        back.setBackground(new java.awt.Color(255, 255, 255));
-        back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        back.setForeground(new java.awt.Color(204, 0, 51));
-        back.setText("Back");
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
-        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, 80, -1));
-
-        jLabel4.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
-        jLabel4.setText("Semester");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, -1, -1));
-
-        sem.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        sem.setForeground(new java.awt.Color(0, 0, 153));
-        sem.setBorder(null);
-        jPanel1.add(sem, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 80, 20));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 80, 10));
-
-        getdetails.setBackground(new java.awt.Color(255, 255, 255));
-        getdetails.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        getdetails.setForeground(new java.awt.Color(0, 0, 153));
-        getdetails.setText("get details");
-        getdetails.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                getdetailsActionPerformed(evt);
-            }
-        });
-        jPanel1.add(getdetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -136,7 +140,31 @@ public class UpdateMarks extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backActionPerformed
 
+     PreparedStatement pstmt2=null;
+     ResultSet rs2=null;
     private void getdetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getdetailsActionPerformed
+        try {
+            String usr = regno.getText();
+            String semm = sembox.getSelectedItem().toString();
+            MySql msl = new MySql();
+            
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            
+            pstmt2=msl.conn.prepareStatement("select * from marks where RegNo=? and Semester=?");
+            pstmt2.setString(1,usr);
+            pstmt2.setString(2, semm);
+            rs2=pstmt2.executeQuery();
+            
+            while(rs2.next())
+            {
+                model.addRow(new Object[]{rs2.getString("SubName"),rs2.getString("MidSem"),rs2.getString("EndSem"),rs2.getString("TeacherMarks"),rs2.getString("TotalMarks"),rs2.getString("Grade"),rs2.getString("PracticalMarks"),rs2.getString("PGrade")});
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateMarks.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
         
     }//GEN-LAST:event_getdetailsActionPerformed
 
@@ -184,10 +212,9 @@ public class UpdateMarks extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField regno;
-    private javax.swing.JTextField sem;
+    private javax.swing.JComboBox<String> sembox;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
 }

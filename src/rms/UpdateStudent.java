@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static rms.LogIn.user;
 
 /**
  *
@@ -51,13 +52,10 @@ public class UpdateStudent extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         mobile = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cpi = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
         regno = new javax.swing.JTextField();
-        sem = new javax.swing.JTextField();
-        jSeparator5 = new javax.swing.JSeparator();
         updatemarks = new javax.swing.JButton();
         back = new javax.swing.JButton();
         update = new javax.swing.JButton();
@@ -129,30 +127,20 @@ public class UpdateStudent extends javax.swing.JFrame {
         jPanel1.add(mobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 160, 20));
         jPanel1.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 160, 10));
 
-        jLabel2.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
-        jLabel2.setText("Semester");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 160, -1, 30));
-
         jLabel9.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         jLabel9.setText("CPI");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
 
         cpi.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         cpi.setForeground(new java.awt.Color(0, 0, 153));
         cpi.setBorder(null);
-        jPanel1.add(cpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, 80, 20));
-        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 80, 10));
+        jPanel1.add(cpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 80, 20));
+        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 80, 10));
 
         regno.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         regno.setForeground(new java.awt.Color(0, 0, 153));
         regno.setBorder(null);
         jPanel1.add(regno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 160, 20));
-
-        sem.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        sem.setForeground(new java.awt.Color(0, 0, 153));
-        sem.setBorder(null);
-        jPanel1.add(sem, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, 80, 20));
-        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 80, 10));
 
         updatemarks.setBackground(new java.awt.Color(255, 255, 255));
         updatemarks.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
@@ -180,6 +168,11 @@ public class UpdateStudent extends javax.swing.JFrame {
         update.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         update.setForeground(new java.awt.Color(0, 0, 153));
         update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
         jPanel1.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, 80, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 380));
@@ -219,7 +212,7 @@ public class UpdateStudent extends javax.swing.JFrame {
                 nm=rs.getString("Name");
                 cp= rs.getString("CPI");
                 mob=rs.getString("Mobile");
-                semm= rs.getString("Semester");
+             //   semm= rs.getString("Semester");
                 eml=rs.getString("Email");
                 
             }
@@ -233,7 +226,7 @@ public class UpdateStudent extends javax.swing.JFrame {
             email.setText(eml);
             mobile.setText(mob);
             password.setText(dbpass);
-            sem.setText(semm);
+        //    sem.setText(semm);
             cpi.setText(cp);
             
         } catch (SQLException ex) {
@@ -241,6 +234,46 @@ public class UpdateStudent extends javax.swing.JFrame {
         }
           
     }//GEN-LAST:event_getdetailsActionPerformed
+
+   
+    
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        try {
+            // TODO add your handling code here:
+            String rg = regno.getText();
+            String nmm = name.getText();
+            String eml = email.getText();
+            String mb = mobile.getText();
+            String pw = password.getText();
+            String cp = cpi.getText();
+            
+            MySql msl = new MySql();
+            
+            pstmt=msl.conn.prepareStatement("update studentrecord set Name=?, Email=?, Mobile=?, CPI=? where RegNo=?");
+            pstmt2=msl.conn.prepareStatement("update login set password=? where username=?");
+            pstmt.setString(1,nmm);
+            pstmt.setString(2,eml);
+            pstmt.setString(3,mb);
+            pstmt.setString(4,cp);
+             pstmt.setString(5,rg);
+             pstmt2.setString(1,pw); 
+            pstmt2.setString(2,rg);
+            int i = pstmt.executeUpdate();
+            int j = pstmt2.executeUpdate();
+            
+            if(i>0&& j>0)
+            {
+               System.out.println("Success");
+            }
+            else
+            {
+               System.out.println("Not Success"); 
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateStudent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_updateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,7 +316,6 @@ public class UpdateStudent extends javax.swing.JFrame {
     private javax.swing.JTextField email;
     private javax.swing.JButton getdetails;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -295,14 +327,12 @@ public class UpdateStudent extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JTextField mobile;
     private javax.swing.JTextField name;
     private javax.swing.JTextField password;
     private javax.swing.JTextField regno;
-    private javax.swing.JTextField sem;
     private javax.swing.JButton update;
     private javax.swing.JButton updatemarks;
     // End of variables declaration//GEN-END:variables

@@ -13,7 +13,7 @@ public class MySql {
         private static final String CONN_STRING="jdbc:mysql://localhost:3306/RMS";    //Loading JDBC driver for SQL
         static Connection conn = null;
         MySql()
-    {
+        {
        
         
         
