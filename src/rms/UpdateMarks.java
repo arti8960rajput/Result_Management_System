@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -73,6 +74,11 @@ public class UpdateMarks extends javax.swing.JFrame {
         update.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         update.setForeground(new java.awt.Color(0, 0, 153));
         update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
         jPanel1.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 340, 80, -1));
 
         back.setBackground(new java.awt.Color(255, 255, 255));
@@ -108,19 +114,19 @@ public class UpdateMarks extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Subject Name", "Mid Sem Marks", "End Sem Marks", "Teacher Marks", "Total Theory Marks", "Grade", "Practical Marks", "Grade", "Title 9"
+                "Subject Name", "Mid Sem Marks", "End Sem Marks", "Teacher Marks", "Total Theory Marks", "Grade", "Practical Marks", "Grade"
             }
         ));
         jTable1.setRowHeight(25);
@@ -167,6 +173,55 @@ public class UpdateMarks extends javax.swing.JFrame {
      
         
     }//GEN-LAST:event_getdetailsActionPerformed
+
+    PreparedStatement pstmt=null;
+    ResultSet rs=null;
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            String usr = regno.getText();
+            String semm = sembox.getSelectedItem().toString();
+            
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            MySql msl = new MySql();
+            String sql = "update marks set MidSem=?, EndSem=?, TeacherMarks=?, TotalMarks=?, Grade=?, PracticalMarks=?, PGrade=?  where RegNo=? and Semester=? and SubName=?";
+            pstmt=msl.conn.prepareStatement(sql);
+            
+            
+            for(int row=0;row<jTable1.getRowCount();row++)
+            {
+                String sub = jTable1.getModel().getValueAt(row, 0).toString();
+                String mids = jTable1.getModel().getValueAt(row, 1).toString();
+                String ends = jTable1.getModel().getValueAt(row, 2).toString();
+                String tmarks = jTable1.getModel().getValueAt(row, 3).toString();
+                String tt = jTable1.getModel().getValueAt(row, 4).toString();
+                String gr = jTable1.getModel().getValueAt(row, 5).toString();
+                String pmarks = jTable1.getModel().getValueAt(row, 6).toString();
+                String pgr = jTable1.getModel().getValueAt(row, 7).toString();
+                
+                System.out.println("--------------------------------------------------------");
+                System.out.println(sub + " "+ mids+" "+ends+ " "+ tmarks+ " "+tt+ " "+gr+" "+pmarks+" "+pgr);
+                System.out.println("--------------------------------------------------------");
+                
+                
+                pstmt.setString(1, mids);
+                pstmt.setString(2, ends);
+                pstmt.setString(3, tmarks);
+                pstmt.setString(4, tt);
+                pstmt.setString(5, gr);
+                pstmt.setString(6, pmarks);
+                pstmt.setString(7, pgr);
+                pstmt.setString(8, usr);
+                pstmt.setString(9, semm);
+                pstmt.setString(10, sub);
+                pstmt.executeUpdate();
+            }
+            JOptionPane.showMessageDialog(null, "Sucessfully Updated..!!");
+        } catch (SQLException ex) {
+            Logger.getLogger(UpdateMarks.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_updateActionPerformed
 
     /**
      * @param args the command line arguments

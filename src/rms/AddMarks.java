@@ -5,6 +5,13 @@
  */
 package rms;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Deepak
@@ -34,12 +41,11 @@ public class AddMarks extends javax.swing.JFrame {
         regno = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
-        sem = new javax.swing.JTextField();
-        jSeparator3 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         submit = new javax.swing.JButton();
         back = new javax.swing.JButton();
+        sembox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,12 +71,6 @@ public class AddMarks extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         jLabel4.setText("Semester");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, -1, -1));
-
-        sem.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        sem.setForeground(new java.awt.Color(0, 0, 153));
-        sem.setBorder(null);
-        jPanel1.add(sem, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 80, 20));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, 80, 10));
 
         jTable1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -99,6 +99,11 @@ public class AddMarks extends javax.swing.JFrame {
         submit.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         submit.setForeground(new java.awt.Color(0, 153, 0));
         submit.setText("Submit");
+        submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitActionPerformed(evt);
+            }
+        });
         jPanel1.add(submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 350, 80, -1));
 
         back.setBackground(new java.awt.Color(255, 255, 255));
@@ -112,6 +117,10 @@ public class AddMarks extends javax.swing.JFrame {
         });
         jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 350, 80, -1));
 
+        sembox.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        sembox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "select", "1st", "2nd", "3rd", "4th", "5th", "6th" }));
+        jPanel1.add(sembox, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 90, 30));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
 
         pack();
@@ -123,6 +132,57 @@ public class AddMarks extends javax.swing.JFrame {
         as.setVisible(true);
         dispose();
     }//GEN-LAST:event_backActionPerformed
+    PreparedStatement pstmt=null;
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        try {
+            // TODO add your handling code here:
+            String usr = regno.getText();
+            String semm = sembox.getSelectedItem().toString();
+            
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            MySql msl = new MySql();
+            String sql = "insert into  marks (RegNo, Semester, SubName, MidSem, EndSem, TeacherMarks, TotalMarks, Grade, PracticalMarks, PGrade) values (?,?,?,?,?,?,?,?,?,?)";
+            pstmt=msl.conn.prepareStatement(sql);
+            
+            
+            for(int row=0;row<10;row++)
+            {
+                String sub = jTable1.getModel().getValueAt(row, 0).toString();
+                if(sub==null)
+                    break;
+                String mids = jTable1.getModel().getValueAt(row, 1).toString();
+                String ends = jTable1.getModel().getValueAt(row, 2).toString();
+                String tmarks = jTable1.getModel().getValueAt(row, 3).toString();
+                String tt = jTable1.getModel().getValueAt(row, 4).toString();
+                String gr = jTable1.getModel().getValueAt(row, 5).toString();
+                String pmarks = jTable1.getModel().getValueAt(row, 6).toString();
+                String pgr = jTable1.getModel().getValueAt(row, 7).toString();
+                
+                System.out.println("--------------------------------------------------------");
+                System.out.println(sub + " "+ mids+" "+ends+ " "+ tmarks+ " "+tt+ " "+gr+" "+pmarks+" "+pgr);
+                System.out.println("--------------------------------------------------------");
+                
+                System.out.println(sub);
+                
+                pstmt.setString(1, usr);
+                pstmt.setString(2, semm);
+                pstmt.setString(3, sub);
+                pstmt.setString(4, mids);
+                pstmt.setString(5, ends);
+                pstmt.setString(6, tmarks);
+                pstmt.setString(7, tt);
+                pstmt.setString(8, gr);
+                pstmt.setString(9, pmarks);
+                pstmt.setString(10, pgr);
+               
+                pstmt.executeUpdate();
+               
+            }
+            JOptionPane.showMessageDialog(null, "Sucessfully Updated..!!");
+        } catch (SQLException ex) {
+            Logger.getLogger(AddMarks.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_submitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,10 +227,9 @@ public class AddMarks extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField regno;
-    private javax.swing.JTextField sem;
+    private javax.swing.JComboBox<String> sembox;
     private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,13 @@
  */
 package rms;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Deepak
@@ -85,6 +92,11 @@ public class DeleteRecord extends javax.swing.JFrame {
         deleterecord.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         deleterecord.setForeground(new java.awt.Color(204, 0, 0));
         deleterecord.setText("Delete Record");
+        deleterecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleterecordActionPerformed(evt);
+            }
+        });
         jPanel1.add(deleterecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 150, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 380));
@@ -98,6 +110,25 @@ public class DeleteRecord extends javax.swing.JFrame {
                 adm.setVisible(true);
                 dispose();
     }//GEN-LAST:event_backActionPerformed
+    
+     PreparedStatement pstmt=null;
+    ResultSet rs=null;
+    private void deleterecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleterecordActionPerformed
+        try {
+            // TODO add your handling code here:
+            String usr = regno.getText();
+            MySql msl = new MySql();
+            
+            pstmt=msl.conn.prepareStatement("delete from marks where RegNo=?");
+            pstmt.setString(1, usr);
+            pstmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Marks Delete successfully");
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteRecord.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+        
+    }//GEN-LAST:event_deleterecordActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,13 @@
  */
 package rms;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Deepak
@@ -157,6 +164,11 @@ public class AddStudent extends javax.swing.JFrame {
         submit.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         submit.setForeground(new java.awt.Color(0, 153, 0));
         submit.setText("Submit");
+        submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitActionPerformed(evt);
+            }
+        });
         jPanel1.add(submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 80, -1));
 
         back.setBackground(new java.awt.Color(255, 255, 255));
@@ -188,6 +200,51 @@ public class AddStudent extends javax.swing.JFrame {
         am.setVisible(true);
         dispose();
     }//GEN-LAST:event_addmarksActionPerformed
+     PreparedStatement pstmt=null,pstmt2=null;
+    ResultSet rs=null;
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        // TODO add your handling code here:
+        
+        String usr = regno.getText();
+        String pass = password.getText();
+        String cpass = cpassword.getText();
+        String nm = name.getText();
+        String eml = email.getText();
+        String mob = mobile.getText();
+        String semm = sembox.getSelectedItem().toString();
+        String cp = cpi.getText();
+        
+        if(pass.equals(cpass))
+        {
+            try {
+                MySql msl = new MySql();
+                pstmt=msl.conn.prepareStatement("insert into studentrecord (RegNo,Name,Email,Mobile,Semester,CPI) values(?,?,?,?,?,?)");
+                pstmt2=msl.conn.prepareStatement("insert into login(username,password) values (?,?)");
+                
+                pstmt.setString(1, usr);
+                pstmt.setString(2, nm);
+                pstmt.setString(3, eml);
+                pstmt.setString(4, mob);
+                 pstmt.setString(5, semm);
+                pstmt.setString(6, cp);
+                pstmt2.setString(1, usr);
+                pstmt2.setString(2, pass);
+                
+                pstmt.executeUpdate();
+                pstmt2.executeUpdate();
+                JOptionPane.showMessageDialog(null, "student details submit successfully");
+            } catch (SQLException ex) {
+                Logger.getLogger(AddStudent.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Password mismatch...!!!!!");
+        }
+        
+        
+        
+    }//GEN-LAST:event_submitActionPerformed
 
     /**
      * @param args the command line arguments
