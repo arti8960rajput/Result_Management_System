@@ -13,7 +13,8 @@ import static rms.LogIn.user;
 
 /**
  *
- * @author Deepak
+ * * @author Arti rajput
+
  */
 public class Admin extends javax.swing.JFrame {
 

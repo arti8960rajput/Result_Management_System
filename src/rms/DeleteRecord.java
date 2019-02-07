@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Deepak
+ * @author Arti chandra
  */
 public class DeleteRecord extends javax.swing.JFrame {
 

@@ -54,6 +54,7 @@ public class Result extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         restable = new javax.swing.JTable();
         back = new javax.swing.JButton();
+        clientChat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -152,6 +153,17 @@ public class Result extends javax.swing.JFrame {
         });
         jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, 80, -1));
 
+        clientChat.setBackground(new java.awt.Color(255, 255, 255));
+        clientChat.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        clientChat.setForeground(new java.awt.Color(0, 153, 0));
+        clientChat.setText("Enquiry chat");
+        clientChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientChatActionPerformed(evt);
+            }
+        });
+        jPanel1.add(clientChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 140, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 380));
 
         pack();
@@ -220,6 +232,12 @@ public class Result extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_backActionPerformed
 
+    private void clientChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientChatActionPerformed
+        // TODO add your handling code here:
+        chat_client cc = new chat_client();
+        cc.setVisible(true);
+    }//GEN-LAST:event_clientChatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -261,6 +279,7 @@ public class Result extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JButton clientChat;
     private javax.swing.JTextField cpi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

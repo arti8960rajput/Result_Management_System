@@ -7,7 +7,8 @@ package rms;
 
 /**
  *
- * @author Deepak
+ * * @author Arti chandra
+
  */
 public class Admininstrative extends javax.swing.JFrame {
 
@@ -34,6 +35,7 @@ public class Admininstrative extends javax.swing.JFrame {
         modifystudent = new javax.swing.JButton();
         addstudent = new javax.swing.JButton();
         back = new javax.swing.JButton();
+        adminChat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,6 +92,17 @@ public class Admininstrative extends javax.swing.JFrame {
         });
         jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 80, -1));
 
+        adminChat.setBackground(new java.awt.Color(255, 255, 255));
+        adminChat.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        adminChat.setForeground(new java.awt.Color(0, 153, 0));
+        adminChat.setText("Chat");
+        adminChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminChatActionPerformed(evt);
+            }
+        });
+        jPanel1.add(adminChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 80, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 390));
 
         pack();
@@ -122,6 +135,13 @@ public class Admininstrative extends javax.swing.JFrame {
         us.setVisible(true);
         dispose();
     }//GEN-LAST:event_modifystudentActionPerformed
+
+    private void adminChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminChatActionPerformed
+        // TODO add your handling code here:
+        chat_server cs = new chat_server();
+        cs.setVisible(true);
+        
+    }//GEN-LAST:event_adminChatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +180,7 @@ public class Admininstrative extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addstudent;
+    private javax.swing.JButton adminChat;
     private javax.swing.JButton back;
     private javax.swing.JButton deletestudent;
     private javax.swing.JLabel jLabel1;

@@ -93,7 +93,7 @@ public class AddMarks extends javax.swing.JFrame {
         jTable1.setRowHeight(25);
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 640, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 640, 220));
 
         submit.setBackground(new java.awt.Color(255, 255, 255));
         submit.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N

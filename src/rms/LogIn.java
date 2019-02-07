@@ -115,6 +115,7 @@ public class LogIn extends javax.swing.JFrame {
     static String jcomb=null;
     static  String user=null;
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        
         user=regno.getText();
         String pass=password.getText();
         jcomb = sembox.getSelectedItem().toString(); 
