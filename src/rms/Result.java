@@ -5,6 +5,12 @@
  */
 package rms;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -37,7 +43,7 @@ public class Result extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        MainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         regno = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
@@ -53,63 +59,67 @@ public class Result extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         restable = new javax.swing.JTable();
-        back = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         clientChat = new javax.swing.JButton();
+        certificate = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        MainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        MainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Footlight MT Light", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
         jLabel1.setText("Your Results");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
+        MainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
 
         regno.setEditable(false);
         regno.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         regno.setForeground(new java.awt.Color(0, 0, 153));
         regno.setBorder(null);
-        jPanel1.add(regno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 160, 20));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 160, 10));
+        MainPanel.add(regno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 160, 20));
+        MainPanel.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 160, 10));
 
         jLabel3.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         jLabel3.setText("Reg No.");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+        MainPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         jLabel4.setText("Semester");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+        MainPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
         sem.setEditable(false);
         sem.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         sem.setForeground(new java.awt.Color(0, 0, 153));
         sem.setBorder(null);
-        jPanel1.add(sem, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 80, 20));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 80, 10));
+        MainPanel.add(sem, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 80, 20));
+        MainPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 80, 10));
 
         jLabel5.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         jLabel5.setText("Name");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
+        MainPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
 
         name.setEditable(false);
         name.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         name.setForeground(new java.awt.Color(0, 0, 153));
         name.setBorder(null);
-        jPanel1.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 160, 20));
-        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 160, 10));
+        MainPanel.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 160, 20));
+        MainPanel.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 160, 10));
 
         jLabel9.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         jLabel9.setText("CPI");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, -1, -1));
+        MainPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
 
         cpi.setEditable(false);
         cpi.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         cpi.setForeground(new java.awt.Color(0, 0, 153));
         cpi.setBorder(null);
-        jPanel1.add(cpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 80, 20));
-        jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 80, 10));
+        MainPanel.add(cpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 80, 20));
+        MainPanel.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 80, 10));
 
         restable.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         restable.setModel(new javax.swing.table.DefaultTableModel(
@@ -140,18 +150,17 @@ public class Result extends javax.swing.JFrame {
         restable.setRowHeight(25);
         jScrollPane1.setViewportView(restable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 630, 190));
+        MainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 630, 260));
+        MainPanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, 200, 10));
 
-        back.setBackground(new java.awt.Color(255, 255, 255));
-        back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
-        back.setForeground(new java.awt.Color(204, 0, 51));
-        back.setText("Back");
-        back.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
-            }
-        });
-        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 340, 80, -1));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Signature");
+        MainPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 430, 70, 30));
+
+        getContentPane().add(MainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 500));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         clientChat.setBackground(new java.awt.Color(255, 255, 255));
         clientChat.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
@@ -162,9 +171,31 @@ public class Result extends javax.swing.JFrame {
                 clientChatActionPerformed(evt);
             }
         });
-        jPanel1.add(clientChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 140, -1));
+        jPanel2.add(clientChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 380));
+        certificate.setBackground(new java.awt.Color(255, 255, 255));
+        certificate.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        certificate.setForeground(new java.awt.Color(0, 0, 153));
+        certificate.setText("Certificate Print");
+        certificate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                certificateActionPerformed(evt);
+            }
+        });
+        jPanel2.add(certificate, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 160, -1));
+
+        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
+        back.setForeground(new java.awt.Color(204, 0, 51));
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+        jPanel2.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 80, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 680, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -238,6 +269,38 @@ public class Result extends javax.swing.JFrame {
         cc.setVisible(true);
     }//GEN-LAST:event_clientChatActionPerformed
 
+    private void certificateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_certificateActionPerformed
+        // TODO add your handling code here:
+         PrinterJob job = PrinterJob.getPrinterJob();
+        job.setJobName("Print Data");
+        job.setPrintable(new Printable(){
+        
+            public int print(Graphics pg,PageFormat pf, int pageNum)
+            {
+                if(pageNum>0)
+                    return Printable.NO_SUCH_PAGE;
+                Graphics2D g2 = (Graphics2D)pg;
+                g2.translate((int)pf.getImageableX()+5, (int)pf.getImageableY()+5);
+                g2.scale(0.55,0.6);
+                
+                MainPanel.paint(g2);
+                return Printable.PAGE_EXISTS;
+            }
+        
+        });
+        boolean ok = job.printDialog();
+        if(ok)
+        {
+            try{
+                job.print();
+            }
+            catch(PrinterException ex)
+            {
+                System.out.println(ex);
+            }
+        }
+    }//GEN-LAST:event_certificateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -278,19 +341,23 @@ public class Result extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel MainPanel;
     private javax.swing.JButton back;
+    private javax.swing.JButton certificate;
     private javax.swing.JButton clientChat;
     private javax.swing.JTextField cpi;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JTextField name;
     private javax.swing.JTextField regno;
