@@ -8,11 +8,13 @@ package rms;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Deepak
+ * @author Arti Rajput
  */
 public class LogIn extends javax.swing.JFrame {
 
@@ -115,7 +117,10 @@ public class LogIn extends javax.swing.JFrame {
     static String jcomb=null;
     static  String user=null;
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        boolean c = checkstatus();
         
+        if(c)
+        {
         user=regno.getText();
         String pass=password.getText();
         jcomb = sembox.getSelectedItem().toString(); 
@@ -140,13 +145,39 @@ public class LogIn extends javax.swing.JFrame {
                // System.out.println("not sucesssssssss");
                 JOptionPane.showMessageDialog(null, "userid or password is wrong");
             }
+            
         }
         catch(SQLException e)
                 {
                     System.out.println(e);
                 }
+        }
+        else
+            JOptionPane.showMessageDialog(null, "First ..you must have to payment then view your result..!!");
     }//GEN-LAST:event_loginActionPerformed
+    public boolean checkstatus()
+    {
+        try {
+            user=regno.getText();
+            jcomb = sembox.getSelectedItem().toString();
+            String st = null;
+            MySql msql = new MySql();
+            pstmt = msql.conn.prepareStatement("select * from feepayment where RegNo=? and Semester=?");
+            pstmt.setString(1,user);
+            pstmt.setString(2,jcomb);
+            rs = pstmt.executeQuery();
+            while(rs.next())
+            {
+                st = rs.getString("status");
+            }
+            if("paid".equals(st))
+                return true;
 
+            } catch (SQLException ex) {
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     private void adminloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminloginActionPerformed
         // TODO add your handling code here:
         Admin as = new Admin();

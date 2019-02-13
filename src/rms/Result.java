@@ -187,13 +187,13 @@ public class Result extends javax.swing.JFrame {
         back.setBackground(new java.awt.Color(255, 255, 255));
         back.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         back.setForeground(new java.awt.Color(204, 0, 51));
-        back.setText("Back");
+        back.setText("Logout");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
-        jPanel2.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 0, 80, -1));
+        jPanel2.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 0, 100, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 680, 60));
 
